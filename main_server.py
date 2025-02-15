@@ -25,7 +25,7 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
 
-    client = ZerePyClient("https://defai.onrender.com")
+    client = ZerePyClient("http://0.0.0.0:8000/")
     initializer = Initializer(client)
     bot = GroqChatbot(client)
 
