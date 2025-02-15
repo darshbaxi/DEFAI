@@ -2,7 +2,7 @@ import requests
 from typing import Optional, List, Dict, Any
 
 class ZerePyClient:
-    def __init__(self, base_url: str = "https://defai.onrender.com"):
+    def __init__(self, base_url: str = "http://0.0.0.0:8000/"):
         self.base_url = base_url.rstrip('/')
 
     def _make_request(self, method: str, endpoint: str, **kwargs) -> Dict[str, Any]:
