@@ -80,7 +80,7 @@ class GroqConnection(BaseConnection):
             )
         return self._client
 
-    def configure(self,groq_api_key:str) -> bool:
+    def configure(self,groq_api_key:str=os.getenv('GROQ_API_KEY')) -> bool:
         """Sets up Groq API authentication"""
         logger.info("\n🤖 GROQ API SETUP")
 
