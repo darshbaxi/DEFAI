@@ -141,8 +141,20 @@ class SonicConnection(BaseConnection):
                     ActionParameter("slippage", False, float, "Max slippage percentage")
                 ],
                 description="Swap tokens"
+            ),
+            "configure-front":Action(
+                name="configure-front",
+                parameters=[
+                    ActionParameter("walletaddress", True, str, "Input token address"),
+                ],
+                description="Swap tokens"
             )
         }
+    def configure_front(self,walletaddress:str)->bool:
+        logger.info("\n🔷 SONIC CHAIN SETUP")
+        self._private_key = walletaddress;
+        return True;
+        
 
     def configure(self,wallet_private_key:str) -> bool:
         logger.info("\n🔷 SONIC CHAIN SETUP")
@@ -196,7 +208,7 @@ class SonicConnection(BaseConnection):
         """Get balance for an address or the configured wallet"""
         try:
             if not address:
-                private_key = os.getenv('SONIC_PRIVATE_KEY')
+                private_key = self._private_key
                 if not private_key:
                     raise SonicConnectionError("No wallet configured")
                 account = self._web3.eth.account.from_key(private_key)
@@ -222,7 +234,7 @@ class SonicConnection(BaseConnection):
     def transfer(self, to_address: str, amount: float, token_address: Optional[str] = None) -> str:
         """Transfer $S or tokens to an address"""
         try:
-            private_key = os.getenv('SONIC_PRIVATE_KEY')
+            private_key = self._private_key
             account = self._web3.eth.account.from_key(private_key)
             chain_id = self._web3.eth.chain_id
             
