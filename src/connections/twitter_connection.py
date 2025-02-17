@@ -212,7 +212,7 @@ class TwitterConnection(BaseConnection):
         # Check existing configuration
         if self.is_configured(verbose=False):
             logger.info("Twitter API is already configured")
-            response = input("Do you want to reconfigure? (y/n): ")
+            response = 'n'
             if response.lower() != 'y':
                 return
 
